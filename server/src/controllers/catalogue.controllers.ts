@@ -1,4 +1,5 @@
 import { RequestHandler } from "express";
+import { catalogues } from "../data/catalogues";
 import Catalogue from "../schemas/catalogue.schema";
 import { responseHandler } from "../utils/response-handler";
 
@@ -35,4 +36,10 @@ export const getAllCatalogueCategories: RequestHandler = async (
   }));
 
   return responseHandler(res).success(200, "", categories);
+};
+
+export const createCatalogues: RequestHandler = async (req, res, next) => {
+  await Catalogue.insertMany(catalogues);
+
+  return responseHandler(res).success(201, "Catalogue created successfully");
 };
