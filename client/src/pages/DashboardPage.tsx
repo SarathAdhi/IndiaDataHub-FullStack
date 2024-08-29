@@ -1,31 +1,42 @@
+import { ButtonWithIcon } from "@/components/ButtonWithIcon";
+import CatalogueDataTable from "@/components/CatalogueDataTable";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/layouts/PageLayout";
 import {
   BookmarkIcon,
   ChartLineIcon,
+  ChevronDownIcon,
   ChevronLeftIcon,
-  ChevronRight,
   FilterIcon,
-  LucideIcon,
   PinIcon,
   SearchIcon,
   ShoppingCartIcon,
 } from "lucide-react";
 
-const ButtonWithIcon = ({ Icon }: { Icon: LucideIcon }) => (
-  <Button size="icon" variant="outline" className="size-9">
-    <Icon className="size-5" />
-  </Button>
-);
+import { useLoaderData } from "react-router-dom";
 
 const DashboardPage = () => {
+  const { catalogues, categories } = useLoaderData() as {
+    catalogues: Catalogue[];
+    categories: {
+      Category: string;
+      SubCategories: string[];
+    }[];
+  };
+
   return (
     <PageLayout className="gap-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <ChevronLeftIcon />
 
-          <h4>Economic Monitor</h4>
+          <h5>Economic Monitor</h5>
         </div>
 
         <div className="flex items-center divide-x">
@@ -54,30 +65,52 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      <div className="flex-1 grid grid-cols-6 gap-4">
-        <div className="grid w-full h-full space-y-2">
+      <div className="flex-1 flex gap-4">
+        <div className="max-w-60 grid w-full h-full space-y-2">
           <div className="bg-primary/20 py-2 px-3 rounded-lg">
             <span className="text-xs">Category:</span>
 
-            <h6>India & States</h6>
+            <div className="flex items-center justify-between">
+              <h6>India & States</h6>
+
+              <ChevronDownIcon className="size-5" />
+            </div>
           </div>
 
-          <div className="flex-1 h-[calc(100vh-216px)] bg-primary/10 p-3 rounded-lg space-y-4 overflow-auto">
+          <div className="flex-1 h-[calc(100vh-216px)] bg-primary/10 p-3 rounded-lg space-y-2 overflow-auto">
             <div className="bg-background rounded-md p-3">
               <h6>Homepage</h6>
             </div>
 
-            {Array.from({ length: 50 }).map(() => (
-              <div className="flex items-center">
-                <ChevronRight className="size-4" />
+            <Accordion type="multiple">
+              {categories.map(({ Category, SubCategories }) => (
+                <AccordionItem
+                  key={Category}
+                  value={Category}
+                  className="w-full"
+                >
+                  <AccordionTrigger className="w-full h-10 rounded-md !text-base hover:bg-muted justify-start">
+                    <p className="font-medium">{Category}</p>
+                  </AccordionTrigger>
 
-                <p className="font-medium">Banking</p>
-              </div>
-            ))}
+                  <AccordionContent className="pl-4">
+                    {SubCategories.map((subCategory) => (
+                      <Button
+                        key={subCategory}
+                        className="w-full flex items-center justify-between"
+                        variant="ghost"
+                      >
+                        {subCategory}
+                      </Button>
+                    ))}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </div>
 
-        <div className="col-span-3">Eight</div>
+        <CatalogueDataTable catalogues={catalogues} />
       </div>
     </PageLayout>
   );

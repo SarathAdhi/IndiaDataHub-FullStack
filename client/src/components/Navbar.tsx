@@ -7,19 +7,36 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAppStore } from "@/store";
-import { LogInIcon } from "lucide-react";
+import { LogInIcon, SearchIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
 const Navbar = () => {
   const { user, logout } = useAppStore((state) => state);
 
   return (
     <nav className="p-4 h-14 w-full bg-primary text-primary-foreground flex items-center justify-between">
-      <div>
-        <Link to="/dashboard">
-          <img src="/logo.svg" className="h-8" />
+      <div className="flex items-center gap-20">
+        <Link to="/dashboard" className="flex-shrink-0">
+          <img src="/logo.svg" className="h-8 flex-shrink-0" />
         </Link>
+
+        <div className="relative flex items-center">
+          <SearchIcon className="size-5 absolute left-2 top-2 text-foreground" />
+
+          <Input
+            className="pl-10 pr-24 h-9 w-96 text-foreground !outline-none !ring-0 !ring-offset-0"
+            placeholder="Search for data and analytics"
+          />
+
+          <Button
+            variant="outline"
+            className="h-7 absolute right-1 text-gray-400 font-normal"
+          >
+            Search
+          </Button>
+        </div>
       </div>
 
       <div className="flex items-center gap-8">

@@ -4,6 +4,7 @@ import DashboardPage from "./pages/DashboardPage.tsx";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import RegisterPage from "./pages/RegisterPage.tsx";
+import { getCatalogues } from "./routes/catalogue.ts";
 
 export const getBrowserRouter = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ export const getBrowserRouter = createBrowserRouter([
       {
         path: "/dashboard",
         element: <DashboardPage />,
+        loader: getCatalogues,
       },
     ],
   },

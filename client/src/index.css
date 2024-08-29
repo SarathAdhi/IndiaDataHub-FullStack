@@ -60,6 +60,18 @@
 }
 
 @layer base {
+  ::-webkit-scrollbar {
+    @apply w-1.5 rounded-xl;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-200 rounded-xl;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/60 hover:bg-primary/70  rounded-xl;
+  }
+
   * {
     @apply border-border;
   }

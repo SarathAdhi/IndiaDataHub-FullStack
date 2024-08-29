@@ -7,6 +7,7 @@ import cors from "cors";
 import express, { Express } from "express";
 import mongoose from "mongoose";
 import { AuthRouter } from "./routes/auth.routes";
+import { CatalogueRouter } from "./routes/catalogue.routes";
 import { MONGO_DB_URI } from "./utils/my-envs";
 
 const app: Express = express();
@@ -30,6 +31,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", AuthRouter);
+app.use("/catalogues", CatalogueRouter);
 
 mongoose
   .connect(MONGO_DB_URI!)
