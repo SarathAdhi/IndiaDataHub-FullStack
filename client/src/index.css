@@ -59,6 +59,10 @@
   }
 }
 
+#nprogress .bar {
+  height: 4px;
+}
+
 @layer base {
   ::-webkit-scrollbar {
     @apply w-1.5 h-1.5 rounded-xl;

@@ -3,7 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
 import PageLayout from "@/layouts/PageLayout";
 import React from "react";
-import { Await, useLoaderData, useSearchParams } from "react-router-dom";
+import {
+  Await,
+  useLoaderData,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 const GraphDataTable = React.lazy(() => import("@/components/GraphDataTable"));
 
 const GraphPage = () => {
@@ -11,7 +16,7 @@ const GraphPage = () => {
     data: EximData;
   };
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   const country = searchParams.get("country") || "USA";
@@ -32,8 +37,8 @@ const GraphPage = () => {
               { label: "AUS", value: "AUS" },
             ]}
             onValueChange={(value) => {
-              window.location.href = `/view-graph?country=${value}`;
-              // navigate(`/view-graph?country=${value}`, { replace: true });
+              // window.location.href = `/view-graph?country=${value}`;
+              navigate(`/view-graph?country=${value}`, { replace: true });
             }}
           />
 

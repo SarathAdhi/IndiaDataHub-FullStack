@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
+import ReactTopLoader from "./components/ReactTopLoader.tsx";
 import { RequireLoggedIn, RequireLoggedOut } from "./hoc/RouteDecorators.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage.tsx";
@@ -10,39 +11,44 @@ import { getExim } from "./routes/exim.ts";
 
 export const getBrowserRouter = createBrowserRouter([
   {
-    element: <RequireLoggedOut />,
+    element: <ReactTopLoader />,
     children: [
       {
-        path: "/login",
-        element: <LoginPage />,
+        element: <RequireLoggedOut />,
+        children: [
+          {
+            path: "/login",
+            element: <LoginPage />,
+          },
+          {
+            path: "/register",
+            element: <RegisterPage />,
+          },
+          {
+            path: "/forgot-password",
+            element: <ForgotPasswordPage />,
+          },
+        ],
       },
       {
-        path: "/register",
-        element: <RegisterPage />,
-      },
-      {
-        path: "/forgot-password",
-        element: <ForgotPasswordPage />,
-      },
-    ],
-  },
-  {
-    element: <RequireLoggedIn />,
-    children: [
-      {
-        index: true,
-        path: "/",
-        element: <Navigate to="/dashboard" />,
-      },
-      {
-        path: "/dashboard",
-        element: <DashboardPage />,
-        loader: getCatalogues,
-      },
-      {
-        path: "/view-graph",
-        element: <GraphPage />,
-        loader: getExim,
+        element: <RequireLoggedIn />,
+        children: [
+          {
+            index: true,
+            path: "/",
+            element: <Navigate to="/dashboard" />,
+          },
+          {
+            path: "/dashboard",
+            element: <DashboardPage />,
+            loader: getCatalogues,
+          },
+          {
+            path: "/view-graph",
+            element: <GraphPage />,
+            loader: getExim,
+          },
+        ],
       },
     ],
   },
