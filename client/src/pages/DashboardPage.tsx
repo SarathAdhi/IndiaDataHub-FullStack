@@ -19,7 +19,7 @@ import {
   ShoppingCartIcon,
 } from "lucide-react";
 
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const DashboardPage = () => {
   const { catalogues, categories } = useLoaderData() as {
@@ -57,9 +57,11 @@ const DashboardPage = () => {
 
             <ButtonWithIcon Icon={PinIcon} />
 
-            <Button className="h-9">
-              <ChartLineIcon className="size-5" />
-              View Graph
+            <Button className="h-9" asChild>
+              <Link to="/view-graph">
+                <ChartLineIcon className="size-5" />
+                View Graph
+              </Link>
             </Button>
           </div>
         </div>

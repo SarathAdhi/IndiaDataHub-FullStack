@@ -8,6 +8,7 @@ import express, { Express } from "express";
 import mongoose from "mongoose";
 import { AuthRouter } from "./routes/auth.routes";
 import { CatalogueRouter } from "./routes/catalogue.routes";
+import { EximRouter } from "./routes/exim.routes";
 import { MONGO_DB_URI } from "./utils/my-envs";
 
 const app: Express = express();
@@ -32,6 +33,7 @@ app.get("/", (req, res) => {
 
 app.use("/auth", AuthRouter);
 app.use("/catalogues", CatalogueRouter);
+app.use("/exim", EximRouter);
 
 mongoose
   .connect(MONGO_DB_URI!)

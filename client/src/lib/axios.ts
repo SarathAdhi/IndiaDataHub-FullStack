@@ -17,6 +17,10 @@ axios.interceptors.response.use(
     return data;
   },
   (error) => {
+    if (error.code === "ERR_NETWORK") {
+      toast.error("SERVER DOWN");
+    }
+
     const data = error.response?.data;
 
     if (data?.message) toast.error(data.message);

@@ -4,10 +4,11 @@ import {
   getAllCatalogue,
   getAllCatalogueCategories,
 } from "../controllers/catalogue.controllers";
+import { protectedRoute } from "../middlewares/protected";
 
 const router = Router();
 
-router.get("/", getAllCatalogue);
+router.get("/", protectedRoute, getAllCatalogue);
 
 router.get("/categories", getAllCatalogueCategories);
 

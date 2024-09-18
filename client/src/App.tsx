@@ -17,7 +17,7 @@ const App = () => {
   if (isLoading)
     return (
       <div className="h-screen grid place-content-center">
-        <Loader2 className="animate-spin size-10" />
+        <Loader2 className="animate-spin size-10 text-black" />
       </div>
     );
 
