@@ -11,6 +11,7 @@ const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const auth_routes_1 = require("./routes/auth.routes");
 const catalogue_routes_1 = require("./routes/catalogue.routes");
+const exim_routes_1 = require("./routes/exim.routes");
 const my_envs_1 = require("./utils/my-envs");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 });
 app.use("/auth", auth_routes_1.AuthRouter);
 app.use("/catalogues", catalogue_routes_1.CatalogueRouter);
+app.use("/exim", exim_routes_1.EximRouter);
 mongoose_1.default
     .connect(my_envs_1.MONGO_DB_URI)
     .then(() => console.log("MONGODB: CONNECTED TO DB"));
