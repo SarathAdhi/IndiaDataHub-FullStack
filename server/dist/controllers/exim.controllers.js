@@ -29,8 +29,14 @@ const getExim = async (req, res, next) => {
     });
     const result = (await response.json());
     if (result.message) {
-        cache[cacheKey] = { data: result, timestamp: Date.now() };
-        return (0, response_handler_1.responseHandler)(res).success(200, "", result);
+        cache[cacheKey] = {
+            data: { ...result, fetchDetails: "Cache Data" },
+            timestamp: Date.now(),
+        };
+        return (0, response_handler_1.responseHandler)(res).success(200, "", {
+            ...result,
+            fetchDetails: "Fresh Data",
+        });
     }
     const childMap = {};
     const modifiedData = [];
@@ -55,9 +61,13 @@ const getExim = async (req, res, next) => {
         country: result.country,
         exim_type: result.exim_type,
         frequency: result.frequency,
+        fetchDetails: "Cache Data",
     };
     cache[cacheKey] = { data, timestamp: Date.now() };
-    return (0, response_handler_1.responseHandler)(res).success(200, "Fresh data", data);
+    return (0, response_handler_1.responseHandler)(res).success(200, "Fresh data", {
+        ...data,
+        fetchDetails: "Fresh Data",
+    });
 };
 exports.getExim = getExim;
 //# sourceMappingURL=exim.controllers.js.map
