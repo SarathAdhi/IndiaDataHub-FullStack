@@ -8,9 +8,9 @@ export async function middleware(request: NextRequest) {
 
   try {
     user = await fetchUser();
-  } catch (error) {}
-
-  const pathname = request.nextUrl.pathname;
+  } catch (error) {
+    console.log(error);
+  }
 
   if (!user) {
     res.cookies.delete("bearer-token");
@@ -26,5 +26,6 @@ export const config = {
     "/((?!.+\\.[\\w]+$|_next).)",
     "/",
     "/dashboard",
+    "/view-graph",
   ],
 };

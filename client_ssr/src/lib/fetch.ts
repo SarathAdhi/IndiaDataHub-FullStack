@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 const serverBaseUrl = process.env.NEXT_PUBLIC_SERVER_BASE_URL;
 
 const getHeaders = () => {
-  let token = cookies().get("bearer-token")?.value;
+  const token = cookies().get("bearer-token")?.value;
 
   return new Headers({
     Authorization: token ? `Bearer ${token}` : "",
@@ -58,7 +58,7 @@ export const fetchFunc = {
 
   post: async <T>(
     url: string,
-    body: any,
+    body: BodyInit | null | undefined,
     options?: RequestInit,
     returnFullResponse: boolean = false
   ): Promise<{ data: T | null; error: string | null }> =>

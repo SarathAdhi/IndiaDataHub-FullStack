@@ -6,7 +6,7 @@ interface EximTableData {
   hierarchy: string;
   parent: string;
   subItems?: EximTableData[];
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface EximData {

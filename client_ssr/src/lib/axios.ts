@@ -26,7 +26,7 @@ axios.interceptors.response.use(
 );
 
 axios.interceptors.request.use((config) => {
-  let token = getCookie("bearer-token");
+  const token = getCookie("bearer-token");
 
   if (token) {
     config!.headers!.Authorization = token ? `Bearer ${token}` : "";
