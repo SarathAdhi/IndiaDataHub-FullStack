@@ -48,7 +48,9 @@ const TableRowRenderer: React.FC<TableRowProps> = ({ item, isParent }) => {
         </TableCell>
 
         {months.map((month) => (
-          <TableCell key={month}>{item[month]?.toFixed(1)}</TableCell>
+          <TableCell key={month}>
+            {(item[month] as number)?.toFixed(1)}
+          </TableCell>
         ))}
       </TableRow>
 
