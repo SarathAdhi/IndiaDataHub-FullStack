@@ -1,5 +1,5 @@
 import { LucideIcon } from "lucide-react";
-import { Button, ButtonProps } from "../../../client/src/components/ui/button";
+import { Button, ButtonProps } from "./ui/button";
 
 const ButtonWithIcon = ({
   Icon,
