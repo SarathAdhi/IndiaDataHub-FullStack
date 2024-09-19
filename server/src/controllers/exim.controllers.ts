@@ -45,9 +45,15 @@ export const getExim: RequestHandler = async (req, res, next) => {
   const result = (await response.json()) as EximData;
 
   if (result.message) {
-    cache[cacheKey] = { data: result, timestamp: Date.now() };
+    cache[cacheKey] = {
+      data: { ...result, fetchDetails: "Cache Data" },
+      timestamp: Date.now(),
+    };
 
-    return responseHandler(res).success(200, "", result);
+    return responseHandler(res).success(200, "", {
+      ...result,
+      fetchDetails: "Fresh Data",
+    });
   }
 
   const childMap: { [parentId: string]: EximTableData[] } = {};
@@ -75,9 +81,13 @@ export const getExim: RequestHandler = async (req, res, next) => {
     country: result.country,
     exim_type: result.exim_type,
     frequency: result.frequency,
+    fetchDetails: "Cache Data",
   };
 
   cache[cacheKey] = { data, timestamp: Date.now() };
 
-  return responseHandler(res).success(200, "Fresh data", data);
+  return responseHandler(res).success(200, "Fresh data", {
+    ...data,
+    fetchDetails: "Fresh Data",
+  });
 };
